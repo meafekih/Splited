@@ -1,0 +1,13 @@
+{
+    "python.pythonPath": "..\\envs\\Scripts\\python.exe", 
+    "python.linting.pylintArgs": [
+        "--extension-pkg-whitelist=PyQt5",
+        "--extension-pkg-whitelist=src"
+    ],
+    "python.testing.pytestArgs": [
+        "envs"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true
+}
