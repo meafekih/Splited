@@ -1,22 +1,18 @@
-from PyQt5 import QtCore, QtWidgets, QtGui
-from PyQt5.QtGui import QCursor
-from PyQt5.QtCore import QThread, QItemSelectionModel, QTimer, Qt, QUrl
-from PyQt5.QtWidgets import QWidget, QTableWidgetItem, QMessageBox, QFileDialog, QMenu , QAction, QApplication
-from split import Ui_Split
 
 import wave
-import os
-import pyglet
-from time import sleep         
-import threading, time
-from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
+import sys
+import os   
+import time
 import datetime
-
+from PyQt5.QtGui import QCursor
+from PyQt5.QtCore import QTimer, Qt, QUrl, QEvent, pyqtSignal
+from PyQt5.QtWidgets import QWidget, QFileDialog , QApplication
+from split import Ui_Split
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 import speech_recognition as sr
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 import simpleaudio as sa
-import sys
 
 recognizer = sr.Recognizer()
 
@@ -54,10 +50,12 @@ class spliting():
 
 class main(QWidget, Ui_Split):
 
+    keyPressed = pyqtSignal(QEvent)
+    
     def __init__(self, win):
         super().__init__()
         self.setupUi(win)
-        self.form = QtWidgets.QWidget()
+        self.form = QWidget()
         self.count = 0
         self.timer = QTimer(self) 
         self.timer.start(100) 
@@ -104,8 +102,8 @@ class main(QWidget, Ui_Split):
         self.te_end_subsound.setTime(time)
 
     def open_folder(self):
-        options = QtWidgets.QFileDialog.Options()
-        self.dir_out = QtWidgets.QFileDialog.getExistingDirectory(None,
+        options = QFileDialog.Options()
+        self.dir_out = QFileDialog.getExistingDirectory(None,
                       caption="Select", directory="G:\\",options=options)
         if self.dir_out:
             self.lbl_save.setText(self.dir_out)
@@ -113,8 +111,8 @@ class main(QWidget, Ui_Split):
             self.enable(True)
    
     def open_file(self):
-        options = QtWidgets.QFileDialog.Options()
-        self.file_in, _ = QtWidgets.QFileDialog.getOpenFileName(None,
+        options = QFileDialog.Options()
+        self.file_in, _ = QFileDialog.getOpenFileName(None,
                       caption="Open", directory="G:\\",options=options)
         if self.file_in:
             self.lbl_file.setText(self.file_in)
@@ -144,6 +142,8 @@ class main(QWidget, Ui_Split):
         self.btn_avance_plus.clicked.connect(self.avance_time_plus)
         self.txte_affichage.textChanged.connect(self.allowSave)
         self.pb_translate_sound.clicked.connect(self.translation)
+        self.keyPressed.connect(self.on_key)
+
     
     def translation(self):
         self.my_trans = self.sp.get_text(self.dir_out + '//temp' + '.wav')
@@ -207,10 +207,18 @@ class main(QWidget, Ui_Split):
             ligne = '\"' + self.caption + ".wav\"" + ',' + '\"' + self.my_trans +  '\"' + "\n"
             myfile.write(ligne)
        
+    def keyPressEvent(self, event):
+        super(main, self).keyPressEvent(event)
+        self.keyPressed.emit(event)
+
+    def on_key(self, e):
+        if e.key() == Qt.Key_Space:
+            print('c')
+    
 if __name__ == "__main__":
     import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
+    app = QApplication(sys.argv)
+    Form = QWidget()
     ui = main(Form)
     Form.show()
     sys.exit(app.exec_())

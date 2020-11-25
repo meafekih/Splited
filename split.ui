@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>359</width>
+    <width>346</width>
     <height>477</height>
    </rect>
   </property>
@@ -232,7 +232,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame_3">
+    <widget class="QFrame" name="split_frame">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -283,6 +283,24 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>btn_open</tabstop>
+  <tabstop>tb_save_folder</tabstop>
+  <tabstop>pb_define_end</tabstop>
+  <tabstop>pb_play_subsound</tabstop>
+  <tabstop>pb_translate_sound</tabstop>
+  <tabstop>btn_recal_plus</tabstop>
+  <tabstop>btn_recal</tabstop>
+  <tabstop>btn_avance</tabstop>
+  <tabstop>btn_avance_plus</tabstop>
+  <tabstop>slider</tabstop>
+  <tabstop>ds_chorono</tabstop>
+  <tabstop>te_start_subsound</tabstop>
+  <tabstop>te_end_subsound</tabstop>
+  <tabstop>txte_affichage</tabstop>
+  <tabstop>pb_define_start</tabstop>
+  <tabstop>pb_save</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
