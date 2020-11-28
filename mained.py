@@ -157,18 +157,22 @@ class main(Ui_MainWindow):
     
     def slots_ShortCut(self):
         QShortcut(QKeySequence('Ctrl+O'), self.win).activated.connect(self.open_file)
-        QShortcut(QKeySequence.MoveToPreviousChar, self.win).activated.connect(self.open_folder)
-        QShortcut(QKeySequence.MoveToNextChar, self.win).activated.connect(self.open_file)
-        QShortcut(QKeySequence.MoveToPreviousLine, self.win).activated.connect(self.open_file)
-        QShortcut(QKeySequence.MoveToNextLine, self.win).activated.connect(self.open_file)
-        QShortcut(QKeySequence('Ctrl+O'), self.win).activated.connect(self.open_file)
-        QShortcut(QKeySequence('Ctrl+O'), self.win).activated.connect(self.open_file)
-        QShortcut(QKeySequence('Ctrl+O'), self.win).activated.connect(self.open_file)
-        QShortcut(QKeySequence('Ctrl+O'), self.win).activated.connect(self.open_file)
-        QShortcut(QKeySequence('Ctrl+O'), self.win).activated.connect(self.open_file)
-        QShortcut(QKeySequence('Ctrl+O'), self.win).activated.connect(self.open_file)
+        QShortcut(QKeySequence('Ctrl+F'), self.win).activated.connect(self.open_folder)
+        QShortcut(QKeySequence.MoveToPreviousChar, self.win).activated.connect(self.recal_time)
+        QShortcut(QKeySequence.MoveToNextChar, self.win).activated.connect(self.avance_time)
+        QShortcut(QKeySequence.MoveToPreviousLine, self.win).activated.connect(self.recal_time_plus)
+        QShortcut(QKeySequence.MoveToNextLine, self.win).activated.connect(self.avance_time_plus)
+        QShortcut(QKeySequence("Return"), self.win).activated.connect(self.play_pause)
+        QShortcut(QKeySequence('Ctrl+P'), self.win).activated.connect(self.play_subsound)
+        QShortcut(QKeySequence('Ctrl+T'), self.win).activated.connect(self.translation)
+        QShortcut(QKeySequence('Ctrl+A'), self.win).activated.connect(self.save)
         
-   
+    def play_pause(self):
+        if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
+            self.copy2()
+        else:
+            self.copy1()
+
     def translation(self):
         
         try:
