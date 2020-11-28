@@ -307,5 +307,5 @@ if __name__ == "__main__":
     MainWindow.show()
     sys.exit(app.exec_())
 
-#cd "G:/" & G:/Splited/envSplit/Scripts/pyuic5.exe -x "G:/Splited/Splited/splited.ui" -o "G:/Splited/Splited/splited.py"
+#cd "G:/" & G:/Splited/envSplited/Scripts/pyuic5.exe -x "G:/Splited/Splited/splited.ui" -o "G:/Splited/Splited/splited.py"
 #pyinstaller --noconfirm --noconsole --onedir --hidden-import tkinter  --exclude-module tkinter "G:/Splited/Splited/mained.py"
