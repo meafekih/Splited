@@ -1,22 +1,18 @@
 
-import wave
+
 import sys
-import os   
-import time
+import os
 import datetime
-from PyQt5.QtGui import QCursor, QTextCursor, QKeySequence
-from PyQt5.QtCore import QTimer, Qt, QUrl, QEvent, pyqtSignal, QThread, QItemSelectionModel
-from PyQt5.QtWidgets import QWidget, QMainWindow, QFileDialog , QApplication, QShortcut
+from PyQt5.QtGui import QKeySequence
+from PyQt5.QtCore import QTimer, QUrl
+from PyQt5.QtWidgets import QMainWindow, QFileDialog , QApplication, QShortcut
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 import speech_recognition as sr
 from pydub import AudioSegment
-from pydub.silence import split_on_silence
 import simpleaudio as sa
-
-from PyQt5 import QtCore, QtWidgets, QtGui
 from splited import Ui_MainWindow
-
 import logging
+
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s')
@@ -40,12 +36,10 @@ class spliting():
             try:
                 text = recognizer.recognize_google(audio, language=lang)
             except Exception as ex:
-                logger.info('{}'.format(ex))   
-                #text = str(ex)
+                logger.info('{}'.format(ex)) 
         return text
 
     def split_time(self, time1, time2, file_out):
-        # time (millisecond)
         if time1 < time2:
             if time2 > self.duration:
                 time2 = self.duration
@@ -62,8 +56,6 @@ class spliting():
             play_obj.wait_done()
 
 class main(Ui_MainWindow):
-
-    #keyPressed = pyqtSignal(QEvent)
     
     def __init__(self, win):
         super().__init__()
@@ -108,13 +100,13 @@ class main(Ui_MainWindow):
 
     def copy1(self):
         self.mediaPlayer.play()
-        time = self.calc()
-        self.te_start_subsound.setTime(time)
+        timeing = self.calc()
+        self.te_start_subsound.setTime(timeing)
     
     def copy2(self):
         self.mediaPlayer.pause()
-        time = self.calc()
-        self.te_end_subsound.setTime(time)
+        timeing = self.calc()
+        self.te_end_subsound.setTime(timeing)
 
     def open_folder(self):
         options = QFileDialog.Options()
@@ -256,8 +248,6 @@ class main(Ui_MainWindow):
     def keyPressEvent(self, event):
         super(main, self).keyPressEvent(event)
         self.keyPressed.emit(event)
-
-    
             
     def slotButtons(self):
         self.b_1.clicked.connect(lambda: self.typing(self.b_1))
@@ -297,11 +287,9 @@ class main(Ui_MainWindow):
         self.b_35.clicked.connect(lambda: self.typing(self.b_35))
         self.b_36.clicked.connect(lambda: self.typing(self.b_36))
         self.b_37.clicked.connect(lambda: self.typing(self.b_37))
-        self.b_38.clicked.connect(lambda: self.typing(self.b_38))
-        
+        self.b_38.clicked.connect(lambda: self.typing(self.b_38))        
         self.b_del.clicked.connect(self.btn_delete)
-        self.b_s.clicked.connect(lambda: self.typing(self.b_s))
-     
+        self.b_s.clicked.connect(lambda: self.typing(self.b_s))     
      
     def btn_delete(self):
         cursor = self.txte_affichage.textCursor().deletePreviousChar()
@@ -310,7 +298,6 @@ class main(Ui_MainWindow):
         cursor = self.txte_affichage.textCursor()
         self.txte_affichage.setTextCursor(cursor)
         self.txte_affichage.insertPlainText(btn.text())
-
     
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -320,5 +307,5 @@ if __name__ == "__main__":
     MainWindow.show()
     sys.exit(app.exec_())
 
-#cd "G:/" & G:/Splited/envs/Scripts/pyuic5.exe -x "G:/Splited/Splited/split.ui" -o "G:/Splited/Splited/split.py"
-#pyinstaller --noconfirm --noconsole --onefile --hidden-import tkinter  --exclude-module tkinter "G:/Splited/Splited/main.py"
+#cd "G:/" & G:/Splited/envSplit/Scripts/pyuic5.exe -x "G:/Splited/Splited/splited.ui" -o "G:/Splited/Splited/splited.py"
+#pyinstaller --noconfirm --noconsole --onedir --hidden-import tkinter  --exclude-module tkinter "G:/Splited/Splited/mained.py"

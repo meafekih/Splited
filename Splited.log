@@ -1,0 +1,5 @@
+2020-11-28 12:09:34,077:INFO:__main__:name 'threading' is not defined
+2020-11-28 12:10:00,685:INFO:__main__:name 'threading' is not defined
+2020-11-28 12:11:30,190:INFO:__main__:'main' object has no attribute 'th'
+2020-11-28 16:00:24,311:INFO:__main__:super-class __init__() of type spliting was never called
+2020-11-28 16:03:26,245:INFO:__main__:wrapped C/C++ object of type spliting has been deleted
